@@ -25,11 +25,11 @@ type Training struct {
 func (t *Training) Parse(datastring string) (err error) {
 	slice := strings.Split(datastring, ",")
 	if len(slice) != 3 {
-		return fmt.Errorf("Incorrect amount of data", ErrinvalidFormat)
+		return fmt.Errorf("Incorrect amount of data %v", ErrinvalidFormat)
 	}
 	t.Steps, err = strconv.Atoi(slice[0])
 	if err != nil {
-		return fmt.Errorf("Incorrect number of steps", err)
+		return fmt.Errorf("Incorrect number of steps %v", err)
 	}
 	if t.Steps <= 0 {
 		return fmt.Errorf("Negative number of steps")
@@ -38,10 +38,10 @@ func (t *Training) Parse(datastring string) (err error) {
 
 	t.Duration, err = time.ParseDuration(slice[2])
 	if err != nil {
-		return fmt.Errorf("Invalid walk duration format", err)
+		return fmt.Errorf("Invalid walk duration format %v", err)
 	}
 	if t.Duration <= 0 {
-		return fmt.Errorf("negative duration of the walk", ErrinvalidFormat)
+		return fmt.Errorf("negative duration of the walk %v", ErrinvalidFormat)
 	}
 	return nil
 }
