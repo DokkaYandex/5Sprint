@@ -18,6 +18,8 @@ var (
 	ErrSteps    = errors.New("Incorrect steps parameter")
 	ErrDuration = errors.New("Incorrect duration parameter")
 	ErrCalor    = errors.New("Invalid calorie parameter")
+	ErrWeight   = errors.New("Incorrect weight parameter")
+	ErrHeight   = errors.New("Incorrect height parameter")
 )
 
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
@@ -28,6 +30,7 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 	if duration <= 0 {
 		return 0, ErrDuration
 	}
+
 	meanSpeed := MeanSpeed(steps, height, duration)
 
 	calories := (weight * meanSpeed * duration.Minutes()) / minInH
@@ -46,6 +49,12 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 	}
 	if duration <= 0 {
 		return 0, ErrDuration
+	}
+	if weight <= 0 {
+		return 0, ErrWeight
+	}
+	if height <= 0 {
+		return 0, ErrHeight
 	}
 	meanSpeed := MeanSpeed(steps, height, duration)
 	return (weight * meanSpeed * duration.Minutes()) / minInH, nil

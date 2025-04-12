@@ -56,7 +56,7 @@ func (t Training) ActionInfo() (string, error) {
 
 	switch t.TrainingType {
 	case "Ходьба":
-		calorie, err = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
+		calorie, err = spentenergy.WalkingSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
 		if err != nil {
 			return "", fmt.Errorf("Calorie calculation error")
 		}
