@@ -30,13 +30,19 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 	if duration <= 0 {
 		return 0, ErrDuration
 	}
+	if weight <= 0 {
+		return 0, ErrWeight
+	}
+	if height <= 0 {
+		return 0, ErrHeight
+	}
 
 	meanSpeed := MeanSpeed(steps, height, duration)
 
 	calories := (weight * meanSpeed * duration.Minutes()) / minInH
 
 	if calories <= 0 {
-		return 0, fmt.Errorf("Negative amount of calories", ErrCalor)
+		return 0, fmt.Errorf("Negative amount of calories %v", ErrCalor)
 	}
 
 	return calories * walkingCaloriesCoefficient, nil
