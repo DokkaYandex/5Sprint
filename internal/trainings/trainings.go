@@ -13,6 +13,7 @@ import (
 
 var (
 	ErrinvalidFormat = errors.New("Invalid Format")
+	ErrUnkownType    = errors.New("неизвестный тип тренировки")
 )
 
 type Training struct {
@@ -65,9 +66,9 @@ func (t Training) ActionInfo() (string, error) {
 			return "", fmt.Errorf("Calorie calculation error")
 		}
 	default:
-		return "неизвестный тип тренировки", ErrinvalidFormat
+		return "", ErrUnkownType
 	}
-	str := fmt.Sprintf("Тип тренеровки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n",
+	str := fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n",
 		t.TrainingType, t.Duration.Hours(), distanc, meanSpeed, calorie)
 	return str, nil
 }
